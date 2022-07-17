@@ -17,19 +17,22 @@ const emojiDict = {
 var emojiArray = Object.keys(emojiDict);
 
 export default function App() {
-  var [meaning, setMeaning] = useState("Translation will appear here..");
   const [emoji, setEmoji] = useState("");
+  var [meaning, setMeaning] = useState("Translation will appear here..");
 
   function findMeaning(event) {
     var input = event.target.value;
     setEmoji(input);
 
-    if (input in emojiDict) var meaning = emojiDict[input];
-    else if (meaning === undefined) {
-      meaning = "Sorry we do not have this emoji in our Database";
-    } else {
-      setMeaning(meaning);
-      console.log(meaning);
+    if (input in emojiDict) meaning = setMeaning(emojiDict[input]);
+    // else if (meaning == undefined) {
+    //   meaning = "Sorry we do not have this emoji in our Database";
+    // }
+    else {
+      setMeaning("Sorry we do not have this emoji in our Database");
+
+      // setMeaning(meaning);
+      // console.log(meaning);
     }
   }
 
@@ -46,13 +49,12 @@ export default function App() {
       </div>
       <h2>{emoji} </h2>
       <h3>{meaning}</h3>
-
-      <div id="emojiArray">
-        Emojis in our DB:
-        {emojiArray.map((item) => {
-          return <span onClick={() => emojiSelector(item)}>{item}</span>;
-        })}
-      </div>
+      {/* <div id="emojiArray"> */}
+      Emojis in our DB:
+      {emojiArray.map((item) => {
+        return <span onClick={() => emojiSelector(item)}> {item} </span>;
+      })}
     </div>
+    // </div>
   );
 }
